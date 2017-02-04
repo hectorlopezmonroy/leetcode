@@ -1,90 +1,21 @@
 import java.lang.Math;
 
 class PalindromeNumber {
-	public static int countDigits(int n) {
-		int res = 0;
-
-		// this loop counts how many digits has the integer
-		while (n - (int)(Math.pow(10, res + 1)) > 0) {
-			res++;
-		}
-		return (res + 1);
-	}
-
-	public static int countLeastSignificativeZeros(int n) {
-		int res = 1;
-
-		// this loop counts how many zeros are the least
-		// significative digits.
-		while (n % (int)(Math.pow(10, res)) == 0) {
-			res++;
-		}
-		return (res - 1);
-	}
 
 	public static boolean isPalindrome(int x) {
-		int i = 0;
+		int reverse = 0;
 
-		if ((0 <= x) && (x < 10)) {
-			// single digit integers are palindromes
-			return true;
-		} else if (x < 0) {
-			// negative integers are not palindromes
+		if ((x < 0) || ((x != 0) && ((x % 10) == 0))) {
+			// negative numbers aren't valid palindromes
+			// also any number that ends with zero but starts with a different
+			// number isn't a valid palindrome.
 			return false;
-		} else {
-			while (x != 0) {
-				if ((x % 10 == 0) && (i == 0)) {
-					// if the least significative digits is zero and this is the
-					// first iteration, then the number is not a palindrome
-					// (e.g. 7170)
-					// The only valid palindromes that this program accepts are
-					// of the form d0d0d
-					return false;
-				} else if ((x % 10 != 0) && (i != 0)) {
-					// unless the least significative digits are zeros, each
-					// iteration should only remove two digits
-					// Preventing a case like 1000021 to be considered a valid
-					// palindrome
-					int j = countDigits(x);
-					if (i - j > 2)
-						return false;
-				} else if ((x % 10 == 0) && (i > 0)) {
-					// checking that the zero has it's corresponding pair
-					// and checking how many zeros dissapeared from the previous
-					// iteration.
-					// Should be equal to the number of least significative
-					// digits that are zeros.
-					int j = countDigits(x);
-					int z = countLeastSignificativeZeros(x);
-					if ((i - j == 2 + z)
-						&& (((x / (int) Math.pow(10, i - 1)) % 10) == 0)) {
-						x = (int) (x / Math.pow(10, z));
-					} else {
-						return false;
-					}
-				}
-				i = countDigits(x);
-				if (i % 2 == 0) {
-					// the number has an even count of digits
-					if (x % 10 != (x / (int) Math.pow(10, i - 1)) % 10) {
-						return false;
-					}
-				} else {
-					// the number has an odd count of digits
-					if (x > 9) {
-						// the number is larger than one digit but still odd
-						if (x % 10 != (x / (int) Math.pow(10, i - 1)) % 10) {
-							return false;
-						}
-					} else {
-						// digit in the middle doesn't need any check
-						return true;
-					}
-				}
-				x = (int) ((x - ((x % 10) * Math.pow(10, i - 1))) / 10);
-			}
 		}
-		return true;
+		while (x > reverse) {
+			reverse = (reverse * 10) + (x % 10);
+			x = x / 10;
+		}
+		return ((x == reverse) || (x == reverse / 10));
 	}
 
 	public static void main(String args[]) {
