@@ -1,3 +1,7 @@
+/*
+ * Determine wheter an integer is a palindrome. Do this without extra space.
+ */
+
 import java.lang.Math;
 
 class PalindromeNumber {
@@ -5,10 +9,10 @@ class PalindromeNumber {
 	public static boolean isPalindrome(int x) {
 		int reverse = 0;
 
+		// negative numbers aren't valid palindromes
+		// also any number that ends with zero but starts with a different
+		// number isn't a valid palindrome.
 		if ((x < 0) || ((x != 0) && ((x % 10) == 0))) {
-			// negative numbers aren't valid palindromes
-			// also any number that ends with zero but starts with a different
-			// number isn't a valid palindrome.
 			return false;
 		}
 		while (x > reverse) {

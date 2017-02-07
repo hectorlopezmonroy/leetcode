@@ -1,3 +1,15 @@
+/*
+ * Reverse digits of an integer.
+ *
+ * Example 1:
+ * 	x = 123, return 321
+ *
+ * Example 2:
+ * 	x = -123, return -321
+ *
+ * The input is assumed to be a 32-bit signed integer. Your function should
+ * return 0 when the reversed integer overflows.
+ */
 import java.util.Vector;
 
 public class ReverseInteger {
@@ -15,7 +27,8 @@ public class ReverseInteger {
 		}
 		for (int k = 0; k < digits.size(); k++) {
 			try {
-				temp = Math.multiplyExact(digits.get(k), (int) Math.pow(10, digits.size() - k - 1));
+				temp = Math.multiplyExact(digits.get(k),
+										  (int) Math.pow(10, digits.size() - k - 1));
 				res = Math.addExact(res, temp);
 			} catch (ArithmeticException e) {
 				return 0;
