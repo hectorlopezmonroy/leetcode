@@ -22,85 +22,85 @@ import java.util.LinkedList;
 
 class LetterCombinationsOfAPhoneNumber {
 
-	public static void display(List<String> l) {
-		System.out.print("[");
-		for (int i = 0; i < l.size(); i++) {
-			if (i < l.size() - 1) {
-				System.out.print("'" + l.get(i) + "', ");
-			} else {
-				System.out.print("'" + l.get(i) + "'");
-			}
-		}
-		System.out.println("]");
-	}
+    public static void display(List<String> l) {
+        System.out.print("[");
+        for (int i = 0; i < l.size(); i++) {
+            if (i < l.size() - 1) {
+                System.out.print("'" + l.get(i) + "', ");
+            } else {
+                System.out.print("'" + l.get(i) + "'");
+            }
+        }
+        System.out.println("]");
+    }
 
-	public static List<String> letterCombinations(String digits) {
-		int i = 0;
-		List<String> res = new LinkedList<String>();
-		char[][] mappedChars = {{'a', 'b', 'c'},
-								{'d', 'e', 'f'},
-								{'g', 'h', 'i'},
-								{'j', 'k', 'l'},
-								{'m', 'n', 'o'},
-								{'p', 'q', 'r', 's'},
-								{'t', 'u', 'v'},
-								{'w', 'x', 'y', 'z'}};
+    public static List<String> letterCombinations(String digits) {
+        int i = 0;
+        List<String> res = new LinkedList<String>();
+        char[][] mappedChars = {{'a', 'b', 'c'},
+            {'d', 'e', 'f'},
+            {'g', 'h', 'i'},
+            {'j', 'k', 'l'},
+            {'m', 'n', 'o'},
+            {'p', 'q', 'r', 's'},
+            {'t', 'u', 'v'},
+            {'w', 'x', 'y', 'z'}};
 
-		if (digits.contains("1") || digits.length() == 0) {
-			return res;
-		}
-		do {
-			char c = digits.charAt(i);
-			short d = (short) Character.getNumericValue(c);
-			if (i == 0) {
-				for (int j = 0; j < mappedChars[d - 2].length; j++) {
-					res.add(Character.toString(mappedChars[d - 2][j]));
-				}
-			} else {
-				while (res.get(0).length() == i) {
-					String prefix = res.remove(0);
-					for (int j = 0; j < mappedChars[d - 2].length; j++) {
-						res.add(prefix.concat(Character.toString(mappedChars[d - 2][j])));
-					}
-				}
-			}
-			i++;
-		} while (i < digits.length());
+        if (digits.contains("1") || digits.length() == 0) {
+            return res;
+        }
+        do {
+            char c = digits.charAt(i);
+            short d = (short) Character.getNumericValue(c);
+            if (i == 0) {
+                for (int j = 0; j < mappedChars[d - 2].length; j++) {
+                    res.add(Character.toString(mappedChars[d - 2][j]));
+                }
+            } else {
+                while (res.get(0).length() == i) {
+                    String prefix = res.remove(0);
+                    for (int j = 0; j < mappedChars[d - 2].length; j++) {
+                        res.add(prefix.concat(Character.toString(mappedChars[d - 2][j])));
+                    }
+                }
+            }
+            i++;
+        } while (i < digits.length());
 
-		return res;
-	}
+        return res;
+    }
 
-	public static void main(String args[]) {
-		String str = "";
-		List<String> combinations;
+    public static void main(String args[]) {
+        String str = "";
+        List<String> combinations;
 
-		System.out.print("For string '" + str
-							+ "' its letter combinations are " );
-		combinations = letterCombinations(str);
-		display(combinations);
+        System.out.print("For string '" + str
+                + "' its letter combinations are " );
+        combinations = letterCombinations(str);
+        display(combinations);
 
-		str = "1";
-		System.out.print("For string '" + str
-							+ "' its letter combinations are " );
-		combinations = letterCombinations(str);
-		display(combinations);
+        str = "1";
+        System.out.print("For string '" + str
+                + "' its letter combinations are " );
+        combinations = letterCombinations(str);
+        display(combinations);
 
-		str = "2";
-		System.out.print("For string '" + str
-							+ "' its letter combinations are " );
-		combinations = letterCombinations(str);
-		display(combinations);
+        str = "2";
+        System.out.print("For string '" + str
+                + "' its letter combinations are " );
+        combinations = letterCombinations(str);
+        display(combinations);
 
-		str = "23";
-		System.out.print("For string '" + str
-							+ "' its letter combinations are " );
-		combinations = letterCombinations(str);
-		display(combinations);
+        str = "23";
+        System.out.print("For string '" + str
+                + "' its letter combinations are " );
+        combinations = letterCombinations(str);
+        display(combinations);
 
-		str = "29";
-		System.out.print("For string '" + str
-							+ "' its letter combinations are " );
-		combinations = letterCombinations(str);
-		display(combinations);
-	}
+        str = "29";
+        System.out.print("For string '" + str
+                + "' its letter combinations are " );
+        combinations = letterCombinations(str);
+        display(combinations);
+    }
 }

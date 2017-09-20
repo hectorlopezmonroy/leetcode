@@ -16,59 +16,60 @@
  *
  * convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
  */
+
 import java.util.Arrays;
 
 class ZigZagConversion {
 
-	public static String convert(String s, int numRows) {
-		int j = 0;
-		String res = "";
-		boolean up = false;
-		boolean down = true;
-		String[] temp = new String[numRows];
-		Arrays.fill(temp, "");
+    public static String convert(String s, int numRows) {
+        int j = 0;
+        String res = "";
+        boolean up = false;
+        boolean down = true;
+        String[] temp = new String[numRows];
+        Arrays.fill(temp, "");
 
-		if (numRows == 1) {
-			return s;
-		} else if (numRows > 1) {
-			for (int i = 0; i < s.length(); i++) {
-				if (down) {
-					if (j % numRows != numRows - 1) {
-						temp[j] = temp[j] + Character.toString(s.charAt(i));
-						j++;
-					} else if (j % numRows == numRows - 1) {
-						temp[j] = temp[j] + Character.toString(s.charAt(i));
-						j--;
-						down = false;
-						up = true;
-					}
-				} else if (up) {
-					if (j % numRows == 0) {
-						temp[j] = temp[j] + Character.toString(s.charAt(i));
-						j++;
-						up = false;
-						down = true;
-					} else if (j % numRows != 0) {
-						temp[j] = temp[j] + Character.toString(s.charAt(i));
-						j--;
-					}
-				}
-			}
-			for (int i = 0; i < numRows; i++) {
-				res = res + temp[i];
-			}
-		}
-		return res;
-	}
+        if (numRows == 1) {
+            return s;
+        } else if (numRows > 1) {
+            for (int i = 0; i < s.length(); i++) {
+                if (down) {
+                    if (j % numRows != numRows - 1) {
+                        temp[j] = temp[j] + Character.toString(s.charAt(i));
+                        j++;
+                    } else if (j % numRows == numRows - 1) {
+                        temp[j] = temp[j] + Character.toString(s.charAt(i));
+                        j--;
+                        down = false;
+                        up = true;
+                    }
+                } else if (up) {
+                    if (j % numRows == 0) {
+                        temp[j] = temp[j] + Character.toString(s.charAt(i));
+                        j++;
+                        up = false;
+                        down = true;
+                    } else if (j % numRows != 0) {
+                        temp[j] = temp[j] + Character.toString(s.charAt(i));
+                        j--;
+                    }
+                }
+            }
+            for (int i = 0; i < numRows; i++) {
+                res = res + temp[i];
+            }
+        }
+        return res;
+    }
 
-	public static void main(String args[]) {
-		String str = "PAYPALISHIRING";
+    public static void main(String args[]) {
+        String str = "PAYPALISHIRING";
 
-		System.out.println("The ZigZag conversion of string '" + str + "' is '"
-							+ convert(str, 3) + "'.");
+        System.out.println("The ZigZag conversion of string '" + str + "' is '"
+                + convert(str, 3) + "'.");
 
-		str = "AB";
-		System.out.println("The ZigZag conversion of string '" + str + "' is '"
-							+ convert(str, 1) + "'.");
-	}
+        str = "AB";
+        System.out.println("The ZigZag conversion of string '" + str + "' is '"
+                + convert(str, 1) + "'.");
+    }
 }
